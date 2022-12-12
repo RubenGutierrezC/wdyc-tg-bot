@@ -1,0 +1,17 @@
+{
+  "name": "wdyc-tg-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.mjs"
+  },
+  "keywords": [],
+  "author": "Ruben Gutierrez",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.2.1",
+    "dotenv": "^16.0.3",
+    "telegraf": "^4.11.2"
+  }
+}

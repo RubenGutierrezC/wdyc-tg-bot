@@ -52,7 +52,7 @@ bot.command("meme", async (ctx) => {
       chats[chatIndex].mode = "IMAGE";
     }
 
-    ctx.reply("Envie una imagen para subir (debe ser como documento)");
+    ctx.reply("Envie una imagen para subir");
   } catch (error) {
     return ctx.reply("Ocurrio un error al subir la frase");
   }

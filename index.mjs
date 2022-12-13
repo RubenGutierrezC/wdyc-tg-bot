@@ -86,6 +86,42 @@ bot.on("text", async (ctx) => {
   }
 });
 
+bot.on("photo", async (ctx) => {
+  try {
+    const chatId = ctx.chat.id;
+
+    const chatIndex = getChatIndex(chats, chatId);
+
+    if (chatIndex > -1) {
+      if (chats[chatIndex].mode === "IMAGE") {
+        const fileId = ctx.update.message.photo.pop().file_id;
+
+        ctx.reply("Subiendo meme...");
+        const res = await axios.get(
+          `https://api.telegram.org/bot${TG_BOT_TOKEN}/getFile?file_id=${fileId}`
+        );
+
+        const filePath = res.data.result.file_path;
+
+        const urlToSend = `https://api.telegram.org/file/bot${TG_BOT_TOKEN}/${filePath}`;
+
+        await upload({
+          type: chats[chatIndex].mode,
+          content: urlToSend,
+          uploadMode: "telegram",
+          uploadedBy: ctx.chat.username,
+        });
+
+        chats.slice(chatIndex, chatIndex);
+
+        ctx.reply("Meme subido con éxito");
+      }
+    }
+  } catch (error) {
+    return ctx.reply("Ocurrio un error al subir la imagen");
+  }
+});
+
 bot.on("document", async (ctx) => {
   try {
     const chatId = ctx.chat.id;

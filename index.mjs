@@ -12,7 +12,7 @@ const chats = [];
 bot.command("start", (ctx) => {
   bot.telegram.sendMessage(
     ctx.chat.id,
-    "Qloq, puedes subir imagenes o frases para el juego what do you cheems. /image o /phrase para subir"
+    "Qloq, puedes subir imagenes o frases para el juego what do you cheems. /meme o /phrase para subir"
   );
 });
 
@@ -34,6 +34,7 @@ bot.command("phrase", async (ctx) => {
     chats.push = [];
     ctx.reply("Envie una frase para subir");
   } catch (error) {
+    console.log(error);
     return ctx.reply("Ocurrio un error al subir la frase");
   }
 });
@@ -55,6 +56,7 @@ bot.command("meme", async (ctx) => {
 
     ctx.reply("Envie una imagen para subir");
   } catch (error) {
+    console.log(error);
     return ctx.reply("Ocurrio un error al subir la frase");
   }
 });

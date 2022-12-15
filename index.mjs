@@ -1,8 +1,9 @@
 import axios from "axios";
 import { Telegraf } from "telegraf";
-import { TG_BOT_TOKEN } from "./config.mjs";
+import { PORT, TG_BOT_TOKEN } from "./config.mjs";
 import { upload } from "./services.mjs";
 import { getChatIndex } from "./utils.mjs";
+import http from "http";
 
 const bot = new Telegraf(TG_BOT_TOKEN);
 
@@ -158,6 +159,17 @@ bot.on("document", async (ctx) => {
   }
 });
 
-bot.launch();
+const server = http.createServer(function (req, res) {
+  // Set the response HTTP header with HTTP status and Content type
+  res.writeHead(200, { "Content-Type": "text/plain" });
 
-console.log("bot init");
+  // Send the response body "Hello World"
+  res.end("What do your cheems bot");
+});
+
+// Prints a log once the server starts listening
+server.listen(PORT, "0.0.0.0", function () {
+  console.log(`Server running at http://0.0.0.0:${PORT}/`);
+  bot.launch();
+  console.log("bot init");
+});
